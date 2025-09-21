@@ -1,0 +1,26 @@
+{
+  "name": "qms-change-control",
+  "version": "1.0.0",
+  "description": "Quality Management System Change Control Application",
+  "main": "server.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "cd backend && npm run dev",
+    "client": "cd frontend && npm start",
+    "test": "cd backend && npm test",
+    "build": "cd frontend && npm run build",
+    "install-all": "npm install && cd backend && npm install && cd ../frontend && npm install"
+  },
+  "keywords": [
+    "QMS",
+    "Change Control",
+    "Quality Management",
+    "Workflow",
+    "Approval"
+  ],
+  "author": "XSpeedite Team",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
