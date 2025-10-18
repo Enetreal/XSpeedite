@@ -50,6 +50,16 @@ export const changeRequestService = {
   reject: (id, comment) => 
     api.post(`/change-requests/${id}/reject`, { comment }),
   
+  // Role-based approval actions
+  requestApproval: (id, approverRole, comment) => 
+    api.post(`/change-requests/${id}/request-approval`, { approverRole, comment }),
+  
+  delegateApproval: (id, delegateToUserId, comment) => 
+    api.post(`/change-requests/${id}/delegate`, { delegateToUserId, comment }),
+  
+  escalateApproval: (id, reason) => 
+    api.post(`/change-requests/${id}/escalate`, { reason }),
+  
   requestChanges: (id, comment) => 
     api.post(`/change-requests/${id}/request-changes`, { comment }),
   
@@ -94,6 +104,106 @@ export const changeRequestService = {
   
   getDashboardStats: () => 
     api.get('/change-requests/dashboard-stats'),
+  
+  // Approval workflow methods
+  getApprovalHistory: (id) => 
+    api.get(`/change-requests/${id}/approval-history`),
+  
+  getRequiredApprovers: (id) => 
+    api.get(`/change-requests/${id}/required-approvers`),
+  
+  checkApprovalPermissions: (id) => 
+    api.get(`/change-requests/${id}/approval-permissions`),
+};
+
+// Approval Service - Role-based approval workflow management
+export const approvalService = {
+  // Get approval matrix for a change request type
+  getApprovalMatrix: (changeType, priority, department) => 
+    api.get('/approvals/matrix', { 
+      params: { changeType, priority, department } 
+    }),
+  
+  // Submit change request for approval based on role hierarchy
+  submitForApproval: (changeRequestId, submissionData) => 
+    api.post(`/approvals/submit/${changeRequestId}`, submissionData),
+  
+  // Get current approval status and next required approvers
+  getApprovalStatus: (changeRequestId) => 
+    api.get(`/approvals/status/${changeRequestId}`),
+  
+  // Approve at current user's level
+  approveAtMyLevel: (changeRequestId, approvalData) => 
+    api.post(`/approvals/approve/${changeRequestId}`, {
+      ...approvalData,
+      action: 'approve'
+    }),
+  
+  // Reject at current user's level
+  rejectAtMyLevel: (changeRequestId, rejectionData) => 
+    api.post(`/approvals/approve/${changeRequestId}`, {
+      ...rejectionData,
+      action: 'reject'
+    }),
+  
+  // Request changes (send back to requester)
+  requestChanges: (changeRequestId, changeRequestData) => 
+    api.post(`/approvals/approve/${changeRequestId}`, {
+      ...changeRequestData,
+      action: 'request_changes'
+    }),
+  
+  // Delegate approval to another user of same or higher level
+  delegateApproval: (changeRequestId, delegationData) => 
+    api.post(`/approvals/delegate/${changeRequestId}`, delegationData),
+  
+  // Escalate to higher level (emergency approvals)
+  escalateApproval: (changeRequestId, escalationData) => 
+    api.post(`/approvals/escalate/${changeRequestId}`, escalationData),
+  
+  // Get approvals pending for current user
+  getMyPendingApprovals: (params = {}) => 
+    api.get('/approvals/my-pending', { params }),
+  
+  // Get approvals delegated to current user
+  getDelegatedApprovals: (params = {}) => 
+    api.get('/approvals/delegated-to-me', { params }),
+  
+  // Get approval history for a change request
+  getApprovalHistory: (changeRequestId) => 
+    api.get(`/approvals/history/${changeRequestId}`),
+  
+  // Check if user can approve at any level for a change request
+  canApprove: (changeRequestId) => 
+    api.get(`/approvals/can-approve/${changeRequestId}`),
+  
+  // Get approval configuration/rules
+  getApprovalRules: () => 
+    api.get('/approvals/rules'),
+  
+  // Update approval rules (admin only)
+  updateApprovalRules: (rules) => 
+    api.put('/approvals/rules', rules),
+  
+  // Get approval performance metrics
+  getApprovalMetrics: (params = {}) => 
+    api.get('/approvals/metrics', { params }),
+  
+  // Bulk approve multiple requests (for authorized users)
+  bulkApprove: (approvalData) => 
+    api.post('/approvals/bulk-approve', approvalData),
+  
+  // Set approval reminders
+  setApprovalReminder: (changeRequestId, reminderData) => 
+    api.post(`/approvals/reminder/${changeRequestId}`, reminderData),
+  
+  // Get approval workflow templates
+  getWorkflowTemplates: () => 
+    api.get('/approvals/workflow-templates'),
+  
+  // Create custom approval workflow
+  createCustomWorkflow: (workflowData) => 
+    api.post('/approvals/custom-workflow', workflowData),
 };
 
 // User Service
