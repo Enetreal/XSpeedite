@@ -84,6 +84,8 @@ const Navbar = () => {
         return 'Pending Approvals';
       case '/my-requests':
         return 'My Requests';
+      case '/my-requests':
+        return 'My Requests';
       case '/users':
         return 'User Management';
       case '/reports':
@@ -110,6 +112,18 @@ const Navbar = () => {
       path: '/change-requests',
       icon: <Assignment />,
       show: true,
+    },
+    {
+      label: 'My Requests',
+      path: '/my-requests',
+      icon: <Assignment />,
+      show: true,
+    },
+    {
+      label: 'Pending Approvals',
+      path: '/pending-approvals',
+      icon: <Notifications />,
+      show: hasRole(['admin', 'cct', 'hod', 'qa']),
     },
     {
       label: 'Users',

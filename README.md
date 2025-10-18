@@ -5,6 +5,7 @@ A comprehensive Quality Management System (QMS) Change Control application that 
 ## Features
 
 ### Core Functionality
+
 - **Automatic Date Generation**: Captures request dates automatically
 - **Questionnaire System**: Automated forms for change determination
 - **Approval Workflow**: Multi-stage approval process (HOD → QA Correspondent → CCT)
@@ -17,6 +18,7 @@ A comprehensive Quality Management System (QMS) Change Control application that 
 - **Audit Trail**: Complete activity logging
 
 ### User Roles
+
 - **Change Requester**: Initiates and manages change requests
 - **Head of Department (HOD)**: First-level approval
 - **QA Correspondent**: Quality assurance review and effectiveness checks
@@ -24,6 +26,7 @@ A comprehensive Quality Management System (QMS) Change Control application that 
 - **Admin**: System administration and user management
 
 ### Technical Stack
+
 - **Backend**: Node.js with Express.js
 - **Frontend**: React.js with Material-UI
 - **Database**: MongoDB with Mongoose ODM
@@ -33,7 +36,7 @@ A comprehensive Quality Management System (QMS) Change Control application that 
 
 ## Project Structure
 
-```
+```text
 qms-change-control/
 ├── backend/                 # Node.js API server
 │   ├── config/             # Database and app configuration
@@ -59,6 +62,7 @@ qms-change-control/
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - MongoDB
 - npm or yarn
@@ -66,38 +70,44 @@ qms-change-control/
 ### Installation
 
 1. Clone the repository
+
 ```bash
 git clone <repository-url>
 cd qms-change-control
-```
 
-2. Install dependencies
+
+1. Install dependencies
+
 ```bash
 npm run install-all
 ```
 
-3. Set up environment variables
+Set up environment variables
+
 ```bash
 # Create .env file in backend directory
 cp backend/.env.example backend/.env
 # Edit the .env file with your configuration
 ```
 
-4. Start the development servers
+Start the development servers
+
 ```bash
 npm run dev
 ```
 
-This will start both the backend server (http://localhost:5000) and the frontend development server (http://localhost:3000).
+This will start both the backend server (<http://localhost:5000>) and the frontend development server (<http://localhost:3000>).
 
 ## API Documentation
 
 ### Authentication Endpoints
+
 - `POST /api/auth/login` - User login
 - `POST /api/auth/register` - User registration
 - `GET /api/auth/profile` - Get user profile
 
 ### Change Request Endpoints
+
 - `GET /api/change-requests` - Get all change requests
 - `POST /api/change-requests` - Create new change request
 - `GET /api/change-requests/:id` - Get specific change request
@@ -106,6 +116,7 @@ This will start both the backend server (http://localhost:5000) and the frontend
 - `POST /api/change-requests/:id/reject` - Reject change request
 
 ### File Upload Endpoints
+
 - `POST /api/files/upload` - Upload evidence files
 - `GET /api/files/:id` - Download file
 
@@ -132,6 +143,7 @@ UPLOAD_PATH=./uploads
 ## Testing
 
 Run the test suite:
+
 ```bash
 npm test
 ```
@@ -139,19 +151,23 @@ npm test
 ## Deployment
 
 ### Using Docker
+
 ```bash
 docker build -t qms-change-control .
 docker run -p 5000:5000 qms-change-control
 ```
 
 ### Manual Deployment
+
 1. Build the frontend
+
 ```bash
 cd frontend && npm run build
 ```
 
-2. Set production environment variables
-3. Start the production server
+Set production environment variables
+Start the production server
+
 ```bash
 cd backend && npm start
 ```

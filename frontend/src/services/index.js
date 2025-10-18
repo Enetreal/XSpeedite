@@ -96,11 +96,14 @@ export const changeRequestService = {
       responseType: 'blob',
     }),
   
-  getPendingApprovals: () => 
-    api.get('/change-requests/pending-approvals'),
+  getPendingApprovals: (params = {}) => 
+    api.get('/change-requests/pending-approvals', { params }),
   
-  getMyRequests: () => 
-    api.get('/change-requests/my-requests'),
+  getMyRequests: (params = {}) => 
+    api.get('/change-requests/my-requests', { params }),
+  
+  submitApproval: (id, action, comments) => 
+    api.post(`/change-requests/${id}/approval-action`, { action, comments }),
   
   getDashboardStats: () => 
     api.get('/change-requests/dashboard-stats'),
