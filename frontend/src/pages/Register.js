@@ -384,7 +384,7 @@ const Register = () => {
         {/* Footer */}
         <Box sx={{ mt: 4, textAlign: 'center' }}>
           <Typography variant="body2" color="text.secondary">
-            © 2024 QMS Change Control System. All rights reserved.
+            © 2025 XSpeedite. All rights reserved.
           </Typography>
         </Box>
       </Box>
