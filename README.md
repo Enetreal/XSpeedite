@@ -1,4 +1,4 @@
-# QMS Change Control Application
+# XSpeedite Change Control Application
 
 A comprehensive Quality Management System (QMS) Change Control application that automates the change request process, approval workflows, and document management.
 
